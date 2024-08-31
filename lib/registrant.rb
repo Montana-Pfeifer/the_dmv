@@ -1,8 +1,9 @@
 class Registrant
-    attr_reader :name, :age
+    attr_reader :name, :age, :permit
                        
-    def initialize(name, age)
+    def initialize(name, age, permit)
         @name = name
-        @age = age   
+        @age = age  
+        @permit = permit 
     end
 end
