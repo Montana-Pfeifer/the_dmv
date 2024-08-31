@@ -1,14 +1,20 @@
 class Facility
-  attr_reader :name, :address, :phone, :services
+  attr_reader :name, :address, :phone, :services, :facilities
 
-  def initialize(name, address, phone)
-    @name = name
-    @address = address
-    @phone = phone
+  def initialize(info)
+    @name = info[:name]
+    @address = info[:address]
+    @phone = info[:phone]
+    @facilities = info[:facilities]
     @services = []
   end
-
-  def add_services(service)
+  
+  def add_service(service)
     @services << service
   end
+
+  def facilities_offering_service(facilities, services)
+    facilities.selct { |facility| facility.service.include?(service)}
+  end
 end
+
