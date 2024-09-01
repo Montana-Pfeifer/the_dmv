@@ -21,7 +21,14 @@ class Facility
     if vehicle.age >= 25
       vehicle.plate_type = :antique
       registration_fee = 25
+    elsif vehicle.engine == :ev
+      vehicle.plate_type = :ev
+      registration_fee = 200   
+    else
+      vehicle.plate_type = :regular
+      registration_fee = 100
     end
-    
+    registration_fee
+  end
 end
 
