@@ -16,5 +16,12 @@ class Facility
   def facilities_offering_service(facilities, services)
     facilities.selct { |facility| facility.service.include?(service)}
   end
+
+  def service_vehicle(vehicle)
+    if vehicle.age >= 25
+      vehicle.plate_type = :antique
+      registration_fee = 25
+    end
+    
 end
 
