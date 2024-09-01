@@ -29,9 +29,30 @@ RSpec.describe Facility do
       vehicle = Vehicle.new(vin: '1a2b3c4d5e6f', year: 1969, make: 'Chevrolet', model: 'Camaro', engine: :ice)
       
       registration_fee = @facility.service_vehicle(vehicle)
-
       expect(vehicle.plate_type).to eq(:antique)
       expect(registration_fee).to eq(25)
     end
   end
+
+  describe '#service_vehicle' do
+    it 'can sevice electic vehicles' do
+       vehicle = Vehicle.new(vin: '987654321abcdefgh', year: 2019, make: 'Chevrolet', model: 'Bolt', engine: :ev)
+
+      registration_fee = @facility.service_vehicle(vehicle)
+      expect(vehicle.plate_type).to eq(:ev)
+      expect(registration_fee).to eq(200)
+    end
+  end
+
+  describe '#service_vehicle' do
+    it "can service regular vehicles" do
+      vehicle = Vehicle.new(vin: '123456789abcdefgh', year: 2012, make: 'Chevrolet', model: 'Cruz', engine: :ice)
+
+      registration_fee = @facility.service_vehicle(vehicle)
+      expect(vehicle.plate_type).to eq(:regular)
+      expect(registration_fee).to eq(100)
+    end  
+  end
+
+  
 end
