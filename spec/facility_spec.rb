@@ -23,4 +23,15 @@ RSpec.describe Facility do
       expect(@facility.services).to eq(['New Drivers License', 'Renew Drivers License', 'Vehicle Registration'])
     end
   end
+
+  describe '#service_vehicle' do
+    it 'can service vehicles 25 years or older' do
+      vehicle = Vehicle.new(vin: '1a2b3c4d5e6f', year: 1969, make: 'Chevrolet', model: 'Camaro', engine: :ice)
+      
+      registration_fee = @facility.service_vehicle(vehicle)
+
+      expect(vehicle.plate_type).to eq(:antique)
+      expect(registration_fee).to eq(25)
+    end
+  end
 end
