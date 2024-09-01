@@ -1,5 +1,5 @@
 class Facility
-  attr_reader :name, :address, :phone, :services, :facilities
+  attr_reader :name, :address, :phone, :services, :facilities, :registered_vehicles, :collected_fees
 
   def initialize(info)
     @name = info[:name]
@@ -7,17 +7,25 @@ class Facility
     @phone = info[:phone]
     @facilities = info[:facilities]
     @services = []
+    @registered_vehicles = []
+    @collected_fees = 0
   end
   
   def add_service(service)
     @services << service
   end
 
-  def facilities_offering_service(facilities, services)
-    facilities.selct { |facility| facility.service.include?(service)}
+  def facilities_offering_service(facilities, service)
+    facilities.select { |facility| facility.service.include?(service)}
   end
 
-  def service_vehicle(vehicle)
+  def register_vehicle(vehicle)
+    if @services.empty?
+      return nil
+    end
+    
+    vehicle.registration_date = Date.today
+
     if vehicle.age >= 25
       vehicle.plate_type = :antique
       registration_fee = 25
@@ -28,7 +36,10 @@ class Facility
       vehicle.plate_type = :regular
       registration_fee = 100
     end
+    @registered_vehicles << vehicle
+    @collected_fees += registration_fee
     registration_fee
+    @registered_vehicles
   end
 end
 
