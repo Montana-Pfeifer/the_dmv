@@ -55,6 +55,7 @@ it 'can issue a permit' do
     expect(registrant_2.age).to eq(15)
     expect(registrant_2.permit?).to eq(false)
     expect(registrant_2.earn_permit).to eq(true)
+    expect(registrant_2.permit?).to eq(true)
 end
     
 end
