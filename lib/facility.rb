@@ -39,7 +39,14 @@ class Facility
     @registered_vehicles << vehicle
     @collected_fees += registration_fee
     registration_fee
-    @registered_vehicles
+  end
+
+  def administer_written_test(registrant)
+    if @services.include?("Written Test") && registrant.permit && registrant.age >= 16
+      registrant.license_data[:written] = true
+    else
+      false
+    end
   end
 end
 
