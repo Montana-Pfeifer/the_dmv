@@ -6,7 +6,7 @@ RSpec.describe VehicleFactory do
 
    describe '.create_vehicles' do
         it 'can create vehicles' do
-        data = [{vin: '987654321abcdefgh', year: 2019, make: 'Chevrolet', model: 'Bolt', engine: :ev} ]
+        data = [{vin_1_10: '987654321abcdefgh', model_year: 2019, make: 'Chevrolet', model: 'Bolt', engine: :ev} ]
 
         vehicles = VehicleFactory.create_vehicles(data)
 
