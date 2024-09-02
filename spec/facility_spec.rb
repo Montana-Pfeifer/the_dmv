@@ -25,6 +25,10 @@ RSpec.describe Facility do
   end
 
   describe '#register_vehicle' do
+  before(:each) do    
+    @facility.add_service('Vehicle Registration')
+  end
+
     it 'can register vehicles 25 years or older' do
       vehicle = Vehicle.new(vin: '1a2b3c4d5e6f', year: 1969, make: 'Chevrolet', model: 'Camaro', engine: :ice)
       
@@ -32,19 +36,16 @@ RSpec.describe Facility do
       expect(vehicle.plate_type).to eq(:antique)
       expect(registration_fee).to eq(25)
     end
-  end
+  
 
-  describe '#register_vehicle' do
     it 'can sevice electic vehicles' do
-       vehicle = Vehicle.new(vin: '987654321abcdefgh', year: 2019, make: 'Chevrolet', model: 'Bolt', engine: :ev)
+      vehicle = Vehicle.new(vin: '987654321abcdefgh', year: 2019, make: 'Chevrolet', model: 'Bolt', engine: :ev)
 
       registration_fee = @facility.register_vehicle(vehicle)
       expect(vehicle.plate_type).to eq(:ev)
       expect(registration_fee).to eq(200)
     end
-  end
 
-  describe '#register_vehicle' do
     it "can service regular vehicles" do
       vehicle = Vehicle.new(vin: '123456789abcdefgh', year: 2012, make: 'Chevrolet', model: 'Cruz', engine: :ice)
 
@@ -54,5 +55,16 @@ RSpec.describe Facility do
     end  
   end
 
+  describe 'administer_written_test' do
+    it 'can administer written tests' do
+      registrant_1 = Registrant.new("Bruce", 18, true)
 
+    expect(registrant_1.license_data).to eq({:written=>false, :license=>false, :renew=>false})
+
+    @facility.add_service ("Written Test")
+
+    expect(@facility.administer_written_test(registrant_1)).to eq(true)
+    expect(registrant_1.license_data).to eq({:written=>true, :license=>false, :renew=>false})
+    end
+  end
 end
