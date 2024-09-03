@@ -1,9 +1,9 @@
 class VehicleFactory
-    def self.create_vehicles(data)
-        data.map do |entry|
+    def create_vehicles(entries)
+        entries.map do |entry|
         Vehicle.new(
             vin: entry[:vin_1_10],
-            year: entry[:model_year].to_i,
+            year: entry[:model_year],
             make: entry[:make],
             model: entry[:model],
             engine: :ev
