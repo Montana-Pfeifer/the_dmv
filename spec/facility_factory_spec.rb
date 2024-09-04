@@ -69,5 +69,25 @@ RSpec.describe FacilityFactory do
        expect(formatted_address).to eq("3164 TELEGRAPH ROAD, ST LOUIS, MO, 63125")
      end
     end
+
+    describe '.create_facilities_for_mo' do
+        it 'can create a facility list for mo' do
+           mo_entries = [{name: "OAKVILLE", address1: "3164 TELEGRAPH ROAD", city: "ST LOUIS", state: "MO", zipcode: "63125", phone: "(314) 887-1050"},
+           {name: "NEW LONDON", address1: "311 S Main Street", city: "NEW LONDON", state: "MO", zipcode: "63459", phone: "(573) 985-6441)"}
+           ]
+   
+           facilities = factory.create_facilities(mo_entries, :mo)
+   
+           expect(facilities.length).to eq(2)
+   
+           expect(facilities[0].name).to eq("OAKVILLE")
+           expect(facilities[0].address).to eq("3164 TELEGRAPH ROAD, ST LOUIS, MO, 63125")
+           expect(facilities[0].phone).to eq("(314) 887-1050")
+   
+           expect(facilities[1].name).to eq("NEW LONDON")
+           expect(facilities[1].address).to eq("311 S Main Street, NEW LONDON, MO, 63459")
+           expect(facilities[1].phone).to eq("(573) 985-6441)")
+        end
+    end
  end
 
