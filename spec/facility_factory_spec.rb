@@ -13,7 +13,7 @@ RSpec.describe FacilityFactory do
      end
    end
 
-    describe '.create_facilities_for_co'
+    describe '.create_facilities_for_co' do
      it 'can create a facility list for co' do
         co_entries = [{ dmv_office: "DMV Tremont Branch", address_li: "2855 Tremont Place", address__1: "Suite 118", city: "Denver", state: "CO", zip: "80205",phone: "(720) 865-4600"},
         {dmv_office: "DMV Northeast Branch", address_li: "4685 Peoria Street", address__1: "Suite 101", city: "Denver", state: "CO", zip: "80239",phone: "(720) 865-4600"}
@@ -30,8 +30,8 @@ RSpec.describe FacilityFactory do
         expect(facilities[1].name).to eq("DMV Northeast Branch")
         expect(facilities[1].address).to eq("4685 Peoria Street, Suite 101, Denver, CO, 80239")
         expect(facilities[1].phone).to eq("(720) 865-4600")
+     end
     end
-    
     describe '#format_address_ny' do
      it 'formats a New York address correctly' do
        entry = { street_address_line_1: "560 WARREN STREET", city: "HUDSON", state: "NY", zip_code: "12534"}
@@ -41,7 +41,7 @@ RSpec.describe FacilityFactory do
        expect(formatted_address).to eq("560 WARREN STREET, HUDSON, NY, 12534")
      end
    end
-   describe '.create_facilities_for_ny'
+   describe '.create_facilities_for_ny' do
      it 'can create a facility list for ny' do
         ny_entries = [{office_name: "HUDSON", street_address_line_1: "560 WARREN STREET", city: "HUDSON", state: "NY", zip_code: "12534", public_phone_number: "5188283350"},
         {office_name: "ROCHESTER DOWNTOWN", street_address_line_1: "200 E. MAIN STREET", city: "ROCHESTER", state: "NY", zip_code: "14604", public_phone_number:"5852594526"}
@@ -58,6 +58,16 @@ RSpec.describe FacilityFactory do
         expect(facilities[1].name).to eq("ROCHESTER DOWNTOWN")
         expect(facilities[1].address).to eq("200 E. MAIN STREET, ROCHESTER, NY, 14604")
         expect(facilities[1].phone).to eq("5852594526")
+     end
+    end
+    describe '#format_address_mo' do
+     it 'formats a missouri address correctly' do
+       entry = { address1: "3164 TELEGRAPH ROAD", city: "ST LOUIS", state: "MO", zipcode: "63125"}
+ 
+       formatted_address = factory.send(:format_address_mo, entry)
+ 
+       expect(formatted_address).to eq("3164 TELEGRAPH ROAD, ST LOUIS, MO, 63125")
+     end
     end
  end
 
